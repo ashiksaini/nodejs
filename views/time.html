@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IST Clock</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #clock {
+            font-size: 2em;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="clock"></div>
+
+    <script>
+        function updateClock() {
+            var currentTime = new Date();
+            var hours = currentTime.getUTCHours() + 5; // Add 5 hours for IST
+            var minutes = currentTime.getUTCMinutes();
+            var seconds = currentTime.getUTCSeconds();
+            var milliseconds = currentTime.getUTCMilliseconds();
+
+            // Format single digit minutes and seconds with leading zero
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            // Format milliseconds with two decimal places
+            milliseconds = milliseconds < 10 ? "0" + milliseconds : milliseconds;
+            milliseconds = milliseconds < 100 ? "0" + milliseconds : milliseconds;
+
+            var timeString = hours + ":" + minutes + ":" + seconds + "." + milliseconds;
+
+            document.getElementById("clock").innerHTML = timeString;
+        }
+
+        // Update the clock every second
+        setInterval(updateClock, 1);
+    </script>
+</body>
+
+</html>
