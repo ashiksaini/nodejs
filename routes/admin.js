@@ -5,6 +5,8 @@ import __dirname from "../utils/path.js";
 
 const router = express.Router();
 
+const products = [];
+
 // admin/add-product => GET
 router.get("/add-product", (req, res, next) => {
   // Send html page as response 
@@ -13,8 +15,8 @@ router.get("/add-product", (req, res, next) => {
 
 // admin/add-product => POST
 router.post("/add-product", (req, res, next) => {
-  console.log(req.body);
+  products.push({ title: req.body.title });
   res.redirect("/");
 });
 
-export default router;
+export default { router, products };
