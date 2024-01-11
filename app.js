@@ -10,6 +10,7 @@ const expressApp = express();
 
 // Set global values at express app
 expressApp.set("view engine", "ejs");
+expressApp.set("views", "views")
 
 // Parse incoming request body
 expressApp
@@ -17,7 +18,7 @@ expressApp
   .use(express.static(path.join(__dirname, "..", "public"))) // It servers static files, like css files, image files those file which are static in this project.
   .use("/admin", adminRoutes.router) // Common segment "/admin" for all the routes available in admin.js
   .use(shopRoutes) // Normal routes
-  .use((req, res, next) => res.status(404).sendFile(path.join(__dirname, "..", "views", "404.html"))); // Basic function of .use
+  .use((req, res, next) => res.status(404).render('404', { pageTitle: "Page Not Found" })); // Basic function of .use
 
 // Start and listen the server
 expressApp.listen(8000);
