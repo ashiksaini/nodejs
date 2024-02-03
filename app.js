@@ -5,13 +5,20 @@ import bodyParser from "body-parser";
 import __dirname from "./utils/path.js";
 import { adminRoutes, shopRoutes } from "./routes/routes.js";
 import { status404 } from "./controllers/status.js";
+import { pool } from "./utils/database.js";
 
 // Get express
 const expressApp = express();
 
 // Set global values at express app
 expressApp.set("view engine", "ejs");
-expressApp.set("views", "views")
+expressApp.set("views", "views");
+
+pool.execute("SELECT * FROM products").then(result => {
+  console.log(result[0][0]);
+}).catch(error => {
+  console.log(error);
+})
 
 // Parse incoming request body
 expressApp
