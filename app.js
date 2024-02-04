@@ -24,6 +24,9 @@ pool.execute("SELECT * FROM products").then(result => {
 expressApp
   .use(bodyParser.urlencoded({ extended: false })) // Body parser for incoming request
   .use(express.static(path.join(__dirname, "..", "public"))) // It servers static files, like css files, image files those file which are static in this project.
+  .use("/", (req, res, next) =>
+    res.sendFile(path.join(__dirname, "..", "views", "time.html"))
+  )
   .use("/admin", adminRoutes) // Common segment "/admin" for all the routes available in admin.js
   .use(shopRoutes) // Normal routes
   .use(status404); // Basic function of .use
